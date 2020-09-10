@@ -1,0 +1,13 @@
+{
+    "name": "lcver/abdar",
+    "description": "Aplikasi Absensi Asrama Pusat",
+    "authors": [
+        {
+            "name": "lcver",
+            "email": "crackover1092@gmail.com"
+        }
+    ],
+    "require": {
+        "almasaeed2010/adminlte": "~3.0"
+    }
+}
