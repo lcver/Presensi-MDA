@@ -7,14 +7,14 @@
  */
 use App\Core\Controller;
 
-class TpqModel extends Controller
+class KategoriModel extends Controller
 {
     /**
      * 
      * create view resource data
      */
     public function create(){
-        return Database::table('tbpresensi_tpq')->get();
+        return Database::table('kategori')->get();
     }
         /**
          * 
@@ -26,7 +26,7 @@ class TpqModel extends Controller
              * display the specified resource data
              */
             public function show($request){
-                return Database::table('tbpresensi_tpq')
+                return Database::table('kategori')
                                             ->where('id',$request)
                                             ->get();
             }

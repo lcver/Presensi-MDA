@@ -14,11 +14,11 @@ class SesiModel extends Controller
      * create view resource data
      */
     public function create(){
-        return Database::table('tbpresensi_sesi')
-                                    ->join('tbpresensi_jadwal')
-                                    ->on('tbpresensi_sesi.idJadwal','tbpresensi_jadwal.id')
-                                    ->orderBy('tanggal asc, tbpresensi_sesi.waktu_mulai','asc')
-                                    ->fetch(['tbpresensi_sesi.*','tbpresensi_jadwal.tanggal'])
+        return Database::table('sesi')
+                                    ->join('jadwal')
+                                    ->on('sesi.idJadwal','jadwal.id')
+                                    ->orderBy('tanggal asc, sesi.waktu_mulai','asc')
+                                    ->fetch(['sesi.*','jadwal.tanggal'])
                                     ->get();
     }
         /**
@@ -26,7 +26,7 @@ class SesiModel extends Controller
          * stored new resourece data
          */
         public function store(array $request){
-            return Database::table('tbpresensi_sesi')->insert($request);
+            return Database::table('sesi')->insert($request);
         }
             /**
              * 
@@ -35,38 +35,38 @@ class SesiModel extends Controller
             public function show($request,$data=null){
                 switch ($request) {
                     case 'get_active':
-                        $result = Database::table('tbpresensi_sesi')
-                                                        ->join('tbpresensi_jadwal')
-                                                        ->on('tbpresensi_sesi.idJadwal','tbpresensi_jadwal.id and tbpresensi_jadwal.status=2 and tbpresensi_sesi.status=2')
-                                                        ->orderBy('tbpresensi_jadwal.tanggal asc, tbpresensi_sesi.waktu_mulai','asc')
-                                                        ->fetch(['tbpresensi_sesi.*','tbpresensi_jadwal.tanggal'])
+                        $result = Database::table('sesi')
+                                                        ->join('jadwal')
+                                                        ->on('sesi.idJadwal','jadwal.id and jadwal.status=2 and sesi.status=2')
+                                                        ->orderBy('jadwal.tanggal asc, sesi.waktu_mulai','asc')
+                                                        ->fetch(['sesi.*','jadwal.tanggal'])
                                                         ->get();
                         break;
                     case 'set_active':
-                        $result = Database::table('tbpresensi_sesi')
-                                                        ->join('tbpresensi_jadwal')
-                                                        ->on('tbpresensi_sesi.idJadwal','tbpresensi_jadwal.id and tbpresensi_jadwal.status=2')
-                                                        ->orderBy('tbpresensi_jadwal.tanggal asc, waktu_mulai','asc')
-                                                        ->fetch(['tbpresensi_sesi.*','tbpresensi_jadwal.tanggal'])
+                        $result = Database::table('sesi')
+                                                        ->join('jadwal')
+                                                        ->on('sesi.idJadwal','jadwal.id and jadwal.status=2')
+                                                        ->orderBy('jadwal.tanggal asc, waktu_mulai','asc')
+                                                        ->fetch(['sesi.*','jadwal.tanggal'])
                                                         ->get();
                         break;
                     case 'byId':
-                        $result = Database::table('tbpresensi_sesi')
+                        $result = Database::table('sesi')
                                                         ->where('id',$data)
                                                         ->orderBy('waktu_mulai','asc')
                                                         ->get();
                         break;
                     case 'get_by_jadwal':
-                        $result = Database::table('tbpresensi_sesi')
+                        $result = Database::table('sesi')
                                                     ->where('idJadwal',$data)
                                                     ->get();
                         break;
                     case 'auto_sesi':
-                        $result = Database::table('tbpresensi_sesi')
-                                                    ->join('tbpresensi_jadwal')
-                                                    ->on('tbpresensi_sesi.idJadwal',"tbpresensi_jadwal.id and tbpresensi_jadwal.status=2 and tbpresensi_sesi.status=1 and tbpresensi_sesi.auto_active='active'")
-                                                    ->orderBy('tbpresensi_jadwal.tanggal asc, waktu_mulai','asc')
-                                                    ->fetch(['tbpresensi_sesi.*','tbpresensi_jadwal.tanggal'])
+                        $result = Database::table('sesi')
+                                                    ->join('jadwal')
+                                                    ->on('sesi.idJadwal',"jadwal.id and jadwal.status=2 and sesi.status=1 and sesi.auto_active='active'")
+                                                    ->orderBy('jadwal.tanggal asc, waktu_mulai','asc')
+                                                    ->fetch(['sesi.*','jadwal.tanggal'])
                                                     ->get();
                         break;
                     default:
@@ -85,7 +85,7 @@ class SesiModel extends Controller
                      * update the specified resource data
                      */
                     public function update($id, $request){
-                        return Database::table('tbpresensi_sesi')
+                        return Database::table('sesi')
                                                     ->where('id',$id)
                                                     ->update($request);
                     }
@@ -94,7 +94,7 @@ class SesiModel extends Controller
                          * remove specified resource data
                          */
                         public function destroy($id){
-                            return Database::table('tbpresensi_sesi')
+                            return Database::table('sesi')
                                                     ->delete($id);
                         }
 }

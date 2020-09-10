@@ -14,7 +14,7 @@ class JadwalModel extends Controller
      * create view resource data
      */
     public function create(){
-        return Database::table('tbpresensi_jadwal')
+        return Database::table('jadwal')
                                     ->orderBy('tanggal','asc')
                                     ->get();
     }
@@ -23,7 +23,7 @@ class JadwalModel extends Controller
          * stored new resourece data
          */
         public function store($request){
-            return Database::table('tbpresensi_jadwal')->insert($request);
+            return Database::table('jadwal')->insert($request);
         }
             /**
              * 
@@ -32,35 +32,35 @@ class JadwalModel extends Controller
             public function show($request,$cond=null){
                 switch ($request) {
                     case 'get_last_id':
-                        $result = Database::table('tbpresensi_jadwal')
+                        $result = Database::table('jadwal')
                                                         ->orderBy('id','desc limit 1')
                                                         ->fetch(['id'])
                                                         ->get();
                         break;
                     case 'get_inactive_jadwal':
-                        $result = Database::table('tbpresensi_jadwal')
+                        $result = Database::table('jadwal')
                                                         ->where('status',1)
                                                         ->get();
                         break;
                     case 'get_active_jadwal':
-                        $result = Database::table('tbpresensi_jadwal')
+                        $result = Database::table('jadwal')
                                                         ->where('status',2)
                                                         ->get();
                         break;
                     case 'get_all_by_jadwal':
-                        $result = Database::table('tbpresensi_jadwal')
-                                                        ->join('tbpresensi_peserta')
-                                                        ->on('tbpresensi_jadwal.id','tbpresensi_peserta.idJadwal and tbpresensi_jadwal.id ='.$cond)
+                        $result = Database::table('jadwal')
+                                                        ->join('peserta')
+                                                        ->on('jadwal.id','peserta.idJadwal and jadwal.id ='.$cond)
                                                         ->fetch(['tanggal'])
                                                         ->get();
                         break;
                     case 'get_by_id' :
-                        $result = Database::table('tbpresensi_jadwal')
+                        $result = Database::table('jadwal')
                                                     ->where('id',$cond['id'])
                                                     ->get();
                         break;
                     case 'get_three_last' :
-                        $result = Database::table('tbpresensi_jadwal')
+                        $result = Database::table('jadwal')
                                                     ->orderBy('id','desc limit 3')
                                                     ->get();
                         break;
@@ -80,7 +80,7 @@ class JadwalModel extends Controller
                      * update the specified resource data
                      */
                     public function update($id,$request){
-                        return Database::table('tbpresensi_jadwal')
+                        return Database::table('jadwal')
                                                     ->where('id',$id)
                                                     ->update($request);
                     }
@@ -89,6 +89,6 @@ class JadwalModel extends Controller
                          * remove specified resource data
                          */
                         public function destroy($id){
-                            return Database::table('tbpresensi_jadwal')->delete($id);
+                            return Database::table('jadwal')->delete($id);
                         }
 }

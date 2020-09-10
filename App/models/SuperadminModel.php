@@ -33,7 +33,7 @@ class SuperadminModel extends Controller
             {
                 $db = new Database;
                 $request = $db->escapeString($request);
-                return Database::table('tbpresensi_superadmin')
+                return Database::table('usradmin')
                                     ->where('password',$request)
                                     ->get();
             }
