@@ -24,7 +24,7 @@ $app_path = str_replace("App/",'',$app_path);
 define('BASEPATH',$app_path);
 
 // db
-define('DBHOST', 'localhost');
-define('DBUSER', 'root');
-define('DBPASS', 'Lucver1092');
-define('DBNAME', 'db_presensi_ppg');
+define('DBHOST', '');
+define('DBUSER', '');
+define('DBPASS', '');
+define('DBNAME', '');
