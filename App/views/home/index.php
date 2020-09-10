@@ -55,12 +55,35 @@
                     <div class="card-body">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="text-md">Nama TPQ</label>
-                                <select class="custom-select" name="presensi_tpq">
-                                    <?php foreach ($data['tpq'] as $d) : ?>
-                                    <option value="<?=$d['id']?>"><?=$d['tpq']?> (<?=$d['desa']?>)</option>
+                                <label class="text-md">Nama Kategori</label>
+                                <select class="custom-select" name="presensi_kategori">
+                                    <?php foreach ($data['kategori'] as $d) : ?>
+                                    <option value="<?=$d['id']?>"><?=$d['kategori']?> (<?=$d['subKategori']?>)</option>
                                     <?php endforeach; ?>
                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="form-check-label">
+                                    <label class="text-md">Kehadiran</label>
+                                </div>
+                                <div class="custom-control custom-radio d-inline-block">
+                                    <input class="custom-control-input" type="radio" id="radioKehadiran1" name="presensi_kehadiran" value="hadir" checked>
+                                    <label for="radioKehadiran1" class="custom-control-label mr-3" style="font-weight:600">Hadir</label>
+                                </div>
+                                <div class="custom-control custom-radio d-inline-block">
+                                    <input class="custom-control-input" type="radio" id="radioKehadiran2" name="presensi_kehadiran" value="izin">
+                                    <label for="radioKehadiran2" class="custom-control-label" style="font-weight:600">Izin</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <label for="">Keterangan Izin</label>
+                                <input type="text" class="form-control" name="presensi_keterangan" placeholder="Tuliskan keterangan izin disini...">
                             </div>
                         </div>
                     </div>

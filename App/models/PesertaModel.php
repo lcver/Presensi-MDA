@@ -29,7 +29,7 @@ class PesertaModel extends Controller
                 switch ($request) {
                     case 'get_by_id_tpq_jadwal':
                         $result = Database::table('peserta')
-                                                        ->raw('idTpq='.$cond['id'].' and idJadwal='.$cond['idJadwal'])
+                                                        ->raw('idKategori='.$cond['id'].' and idJadwal='.$cond['idJadwal'])
                                                         ->orderBy("curent_timestamp","asc")
                                                         ->get();
                         break;
@@ -38,7 +38,7 @@ class PesertaModel extends Controller
                                                 ->raw(
                                                     "nama='".$cond['nama']."'".
                                                     " and jenis_kelamin='".$cond['jenis_kelamin']."'".
-                                                    " and idTpq='".$cond['idTpq']."'".
+                                                    " and idKategori='".$cond['idKategori']."'".
                                                     " and idJadwal='".$cond['idJadwal']."'")
                                                 ->get();
                         break;
@@ -56,12 +56,12 @@ class PesertaModel extends Controller
                     case 'countPeserta_by_tpq':
                         $result = Database::table('peserta')
                                                 ->join('kategori')
-                                                ->on('peserta.idTpq','kategori.id and kategori.id='.$cond['tpq'])
+                                                ->on('peserta.idKategori','kategori.id and kategori.id='.$cond['tpq'])
                                                 ->join('jadwal')
                                                 ->on('peserta.idJadwal','jadwal.id and jadwal.id='.$cond['jadwal'])
                                                 ->fetch([
                                                     'COUNT(peserta.id) as jumlah',
-                                                    'kategori.id as idTpq',
+                                                    'kategori.id as idKategori',
                                                     ])
                                                 ->get();
 

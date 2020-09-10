@@ -27,7 +27,7 @@ class HomeController extends Controller
 
         
         // $this->view('load/index',[],'self');
-        $data['tpq'] = $this->model('TpqModel')->create();
+        $data['kategori'] = $this->model('KategoriModel')->create();
         $this->view('home/index',$data,'peserta');
     }
 
@@ -45,7 +45,9 @@ class HomeController extends Controller
         $postData = [
             'nama'=>$nama,
             'jenis_kelamin'=>$_POST['presensi_jeniskelamin'],
-            'idTpq'=>$_POST['presensi_tpq'],
+            'kehadiran'=>$_POST['presensi_kehadiran'],
+            'keterangan'=>$_POST['presensi_keterangan'],
+            'idKategori'=>$_POST['presensi_kategori'],
             'idJadwal'=>$_POST['presensi_idJadwal']
         ];
         // var_dump($postData);
