@@ -16,5 +16,6 @@
 <script src="<?=BASEURL?>vendor/almasaeed2010/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?=BASEURL?>vendor/almasaeed2010/adminlte/dist/js/adminlte.min.js"></script>
+<script src="<?=BASEURL?>js/mainscript.js"></script>
 </body>
 </html>

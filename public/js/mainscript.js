@@ -116,3 +116,19 @@ btnAuto.on('click', function() {
   data = {id:btnAuto.attr('data')};
   AJAX(data, baseUrl()+'/admin/sesi/setAuto', baseUrl()+"/admin/")
 })
+
+// $(document).ready(function(){
+//   $("#radioKehadiran1","#radioKehadiran2").change(function() {
+//     if($("#radioKehadiran2").is(":checked"))
+//     {
+//     }
+//   })
+// })
+$("input[name='presensi_kehadiran']").on("change", function(){
+  if($("input[name='presensi_kehadiran']:checked").val() == "izin")
+  {
+    $("#boxKeterangan").append('<div class="mt-3" id="keterangan"><label for="">Keterangan Izin</label><input type="text" class="form-control" name="presensi_keterangan" placeholder="Tuliskan keterangan izin disini..."></div>')
+  } else {
+    $("#boxKeterangan").find($("#keterangan")).remove()
+  }
+})

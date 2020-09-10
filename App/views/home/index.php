@@ -81,10 +81,7 @@
                                     <label for="radioKehadiran2" class="custom-control-label" style="font-weight:600">Izin</label>
                                 </div>
                             </div>
-                            <div class="col-md-12 mt-3">
-                                <label for="">Keterangan Izin</label>
-                                <input type="text" class="form-control" name="presensi_keterangan" placeholder="Tuliskan keterangan izin disini...">
-                            </div>
+                            <div class="col-md-12" id="boxKeterangan"></div>
                         </div>
                     </div>
                 </div>
