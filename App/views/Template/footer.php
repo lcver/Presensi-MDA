@@ -64,12 +64,13 @@
               'TPQ ANNAFIU',
               'TPQ BAITUL ISTIQOMAH',
               'TPQ ASSYUHADA',
+              'Pengurus REJAPU'
           ],
           datasets: [
             {
               // data: [1,0,2,0,1,0,0,3],
               data: requestData,
-              backgroundColor : ['#6a8caf','#4baea0','#f67280','#99d8d0','#be9fe1','#eb8242','#9cf196','#484c7f'],
+              backgroundColor : ['#6a8caf','#4baea0','#f67280','#99d8d0','#be9fe1','#eb8242','#9cf196','#484c7f','#722F37'],
             }
           ]
         }

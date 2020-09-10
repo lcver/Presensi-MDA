@@ -27,18 +27,18 @@
                 </div>
                 <div class="col-md-7">
                     <div class="row">
-                    <?php $bgcolor = ['6a8caf','4baea0','f67280','99d8d0','be9fe1','eb8242','9cf196','484c7f']; ?>
-                        <?php $counData = count($data['tpq']); for ($a=0; $a < $counData; $a++) :?>
+                    <?php $bgcolor = ['6a8caf','4baea0','f67280','99d8d0','be9fe1','eb8242','9cf196','484c7f','#722F37']; ?>
+                        <?php $counData = count($data['kategori']); for ($a=0; $a < $counData; $a++) :?>
                         <div class="col-md-6">
                             <div class="info-box">
                                 <span class="info-box-icon bg-primary" style="background:#<?=$bgcolor[$a]?>!important">
                                     <?=$data['jumlahdata'][$a]['jumlah']?>
                                 </span>
                                 <div class="info-box-content">
-                                    <a href="<?=BASEURL?>rekap/tpq/<?=$data['idJadwal']?>/<?=$data['jumlahdata'][$a]['idtpq']?>">
-                                    <span class="info-box-text">TPQ <?=$data['tpq'][$a]['tpq']?></span>
+                                    <a href="<?=BASEURL?>rekap/kategori/<?=$data['idJadwal']?>/<?=$data['jumlahdata'][$a]['idKategori']?>">
+                                    <span class="info-box-text">TPQ <?=$data['kategori'][$a]['kategori']?></span>
                                     </a>
-                                    <span class="info-box-number"><?=$data['tpq'][$a]['desa']?></span>
+                                    <span class="info-box-number"><?=$data['kategori'][$a]['subKategori']?></span>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>

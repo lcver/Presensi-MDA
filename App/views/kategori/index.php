@@ -7,8 +7,8 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <?php foreach ($data['tpq'] as $d) : ?>
-            <h3><?=isset($data['rekap']) ? $data['rekap']." TPQ" : "TPQ" ;?> <?=$d['tpq']?></h3>
+            <?php foreach ($data['kategori'] as $d) : ?>
+            <h3><?=isset($data['rekap']) ? $data['rekap']." TPQ" : "TPQ" ;?> <?=$d['kategori']?></h3>
             <?php endforeach; ?>
             <table class="table table-striped">
                 <thead>

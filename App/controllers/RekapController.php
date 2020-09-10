@@ -6,10 +6,10 @@ class RekapController extends Controller
 {
     public function index()
     {
-        $result = $this->model('TpqModel')->create();
-        $tpq = Helper::null_checker($result);
+        $result = $this->model('KategoriModel')->create();
+        $kategori = Helper::null_checker($result);
 
-        // var_dump($idTpq);
+        // var_dump($idkategori);
 
         $result = $this->model('JadwalModel')->create();
         $jadwal = Helper::null_checker($result);
@@ -21,8 +21,8 @@ class RekapController extends Controller
                 $result = $this->model('PesertaModel')->show('countPeserta_by_jadwal',$d['id']);
                 $aggregates = [];
     
-                foreach ($tpq as $dd) {
-                    $data = $this->model('PesertaModel')->show('countPeserta_by_tpq',['tpq' => $dd['id'],'jadwal' => $d['id']]);
+                foreach ($kategori as $dd) {
+                    $data = $this->model('PesertaModel')->show('countPeserta_by_kategori',['kategori' => $dd['id'],'jadwal' => $d['id']]);
                     $aggregates[] = $data['jumlah'];
                 }
                 
@@ -45,23 +45,23 @@ class RekapController extends Controller
         $this->view('dashboard/rekap',$data);
     }
 
-    public function tpq($jadwal, $tpq)
+    public function kategori($jadwal, $kategori)
     {
         $condition = [
-            'id' => $tpq,
+            'id' => $kategori,
             'idJadwal' => $jadwal
         ];
         
-        $result = $this->model('PesertaModel')->show('get_by_id_tpq_jadwal',$condition);
+        $result = $this->model('PesertaModel')->show('get_by_id_kategori_jadwal',$condition);
         $data['peserta'] = Helper::null_checker($result);
 
 
-        $result = $this->model('TpqModel')->show($tpq);
-        $data['tpq'] = Helper::null_checker($result);
+        $result = $this->model('KategoriModel')->show($kategori);
+        $data['kategori'] = Helper::null_checker($result);
         $data['rekap'] = "Rekap Data";
         
         
-        $this->view('tpq/index',$data);
+        $this->view('kategori/index',$data);
     }
 
     public function data($param)
@@ -73,32 +73,32 @@ class RekapController extends Controller
             $data['idJadwal'] = $d['id'];
         }
         
-        $result = $this->model('TpqModel')->create();
-        $tpq = Helper::null_checker($result);
+        $result = $this->model('KategoriModel')->create();
+        $kategori = Helper::null_checker($result);
 
         $total=0;
-        foreach ($tpq as $d) {
+        foreach ($kategori as $d) {
             $condition = [
                 'id'=> $d['id'],
                 'idJadwal'=>$data['idJadwal']
             ];
 
-            $data['tpq'][] = ['tpq'=>$d['tpq'],'desa'=>$d['desa']];
+            $data['kategori'][] = ['kategori'=>$d['kategori'],'subKategori'=>$d['subKategori']];
 
-            $dataPeserta = $this->model('PesertaModel')->show('get_by_id_tpq_jadwal',$condition);
+            $dataPeserta = $this->model('PesertaModel')->show('get_by_id_kategori_jadwal',$condition);
             
             if($dataPeserta!==NULL){
                 $countData = isset($dataPeserta['nama']) ? 1 : count($dataPeserta);
                 // $countData = count($dataPeserta);
                 $resData[] = [
-                    'idtpq'=> $d['id'],
+                    'idKategori'=> $d['id'],
                     'jumlah'=>$countData
                 ];
                 $subtotal = $countData;
                 $total += $subtotal;
             }else{
                 $resData[] = [
-                    'idtpq'=> $d['id'],
+                    'idKategori'=> $d['id'],
                     'jumlah'=> 0
                 ];
             }
@@ -115,7 +115,7 @@ class RekapController extends Controller
 
     public function jumlah($param)
     {
-        $dataTPQ = $this->model('TpqModel')->create();
+        $dataTPQ = $this->model('KategoriModel')->create();
 
         $id = ['id'=>$param];
         $res = $this->model('JadwalModel')->show('get_by_id',$id);
@@ -128,7 +128,7 @@ class RekapController extends Controller
                 'id'=> $d['id'],
                 'idJadwal'=> $res['id']
             ];
-            $dataPeserta = $this->model('PesertaModel')->show('get_by_id_tpq_jadwal',$condition);
+            $dataPeserta = $this->model('PesertaModel')->show('get_by_id_kategori_jadwal',$condition);
 
             if($dataPeserta!==NULL){
                 $countData = isset($dataPeserta['nama']) ? 1 : count($dataPeserta);

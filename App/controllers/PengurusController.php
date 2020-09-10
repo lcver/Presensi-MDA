@@ -25,43 +25,44 @@ class PengurusController extends Controller
         /**
          * get session when having same idJadwal
          */
-        $result = $this->model('SesiModel')->show('get_by_jadwal',$idJadwal);
-        $data['status_sesi'] = Helper::null_checker($result);
+        // $result = $this->model('SesiModel')->show('get_by_jadwal',$idJadwal);
+        // $data['status_sesi'] = Helper::null_checker($result);
 
-        // get id sesi
-        if(!is_null($data['status_sesi'])){
-            foreach ($data['status_sesi'] as $d) {
-                $data['status_sesi'] = $d['id'];
-            }
-        }
+        // // get id sesi
+        // if(!is_null($data['status_sesi'])){
+        //     foreach ($data['status_sesi'] as $d) {
+        //         $data['status_sesi'] = $d['id'];
+        //     }
+        // }
         // var_dump($data['status_sesi']);die();
 
-        $dataTPQ = $this->model('TpqModel')->create();
+        $dataKategori = $this->model('KategoriModel')->create();
 
         $resData=[];
         $total=0;
-        foreach ($dataTPQ as $d) {
+        foreach ($dataKategori as $d) {
             $condition = [
                 'id'=> $d['id'],
                 'idJadwal'=> $idJadwal
             ];
+            // var_dump($condition);
 
-            $dataPeserta = $this->model('PesertaModel')->show('get_by_id_tpq_jadwal',$condition);
-            // var_dump($dataPeserta);die();
+            $dataPeserta = $this->model('PesertaModel')->show('get_by_id_kategori_jadwal',$condition);
+            // var_dump($dataPeserta);
 
-            $data['tpq'][] = ['tpq'=>$d['tpq'],'desa'=>$d['desa']];
+            $data['kategori'][] = ['kategori'=>$d['kategori'],'subKategori'=>$d['subKategori']];
             if($dataPeserta!==NULL){
                 $countData = isset($dataPeserta['nama']) ? 1 : count($dataPeserta);
                 // $countData = count($dataPeserta);
                 $resData[] = [
-                    'idtpq'=> $d['id'],
+                    'idKategori'=> $d['id'],
                     'jumlah'=>$countData
                 ];
                 $subtotal = $countData;
                 $total += $subtotal;
             }else{
                 $resData[] = [
-                    'idtpq'=> $d['id'],
+                    'idKategori'=> $d['id'],
                     'jumlah'=> 0
                 ];
             }
@@ -74,7 +75,7 @@ class PengurusController extends Controller
         $this->view('dashboard/index',$data);
     }
     
-    public function tpq()
+    public function kategori()
     {
         //get Id
         $id = explode('/',$_GET['url']);
@@ -98,33 +99,33 @@ class PengurusController extends Controller
             'idJadwal' => $idJadwal
         ];
         
-        $result = $this->model('PesertaModel')->show('get_by_id_tpq_jadwal',$condition);
+        $result = $this->model('PesertaModel')->show('get_by_id_kategori_jadwal',$condition);
         $data['peserta'] = Helper::null_checker($result);
 
 
-        $result = $this->model('TpqModel')->show($id);
-        $data['tpq'] = Helper::null_checker($result);
-        if(is_null($data['tpq'])){
-            $data['tpq']=NULL;
+        $result = $this->model('KategoriModel')->show($id);
+        $data['kategori'] = Helper::null_checker($result);
+        if(is_null($data['kategori'])){
+            $data['kategori']=NULL;
         }
         
-        $this->view('tpq/index',$data);
+        $this->view('kategori/index',$data);
     }
 
     public function jumlah()
     {
-        $dataTPQ = $this->model('TpqModel')->create();
+        $dataKategori = $this->model('KategoriModel')->create();
 
         $res = $this->model('JadwalModel')->show('get_active_jadwal');
 
         $resData=[];
         $total=0;
-        foreach ($dataTPQ as $d) {
+        foreach ($dataKategori as $d) {
             $condition = [
                 'id'=> $d['id'],
                 'idJadwal'=> $res['id']
             ];
-            $dataPeserta = $this->model('PesertaModel')->show('get_by_id_tpq_jadwal',$condition);
+            $dataPeserta = $this->model('PesertaModel')->show('get_by_id_kategori_jadwal',$condition);
 
             if($dataPeserta!==NULL){
                 $countData = isset($dataPeserta['nama']) ? 1 : count($dataPeserta);

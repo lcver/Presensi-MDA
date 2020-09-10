@@ -27,7 +27,7 @@ class PesertaModel extends Controller
              */
             public function show($request,$cond=null){
                 switch ($request) {
-                    case 'get_by_id_tpq_jadwal':
+                    case 'get_by_id_kategori_jadwal':
                         $result = Database::table('peserta')
                                                         ->raw('idKategori='.$cond['id'].' and idJadwal='.$cond['idJadwal'])
                                                         ->orderBy("curent_timestamp","asc")
@@ -53,10 +53,10 @@ class PesertaModel extends Controller
                                                     ])
                                                 ->get();
                         break;
-                    case 'countPeserta_by_tpq':
+                    case 'countPeserta_by_kategori':
                         $result = Database::table('peserta')
                                                 ->join('kategori')
-                                                ->on('peserta.idKategori','kategori.id and kategori.id='.$cond['tpq'])
+                                                ->on('peserta.idKategori','kategori.id and kategori.id='.$cond['kategori'])
                                                 ->join('jadwal')
                                                 ->on('peserta.idJadwal','jadwal.id and jadwal.id='.$cond['jadwal'])
                                                 ->fetch([
