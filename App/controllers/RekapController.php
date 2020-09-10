@@ -83,7 +83,11 @@ class RekapController extends Controller
                 'idJadwal'=>$data['idJadwal']
             ];
 
-            $data['kategori'][] = ['kategori'=>$d['kategori'],'subKategori'=>$d['subKategori']];
+            $data['kategori'][] = [
+                'kategori'=>$d['kategori'],
+                'subKategori'=>$d['subKategori'],
+                'jenis'=>$d['jenis']
+            ];
 
             $dataPeserta = $this->model('PesertaModel')->show('get_by_id_kategori_jadwal',$condition);
             

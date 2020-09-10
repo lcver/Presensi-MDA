@@ -50,7 +50,11 @@ class PengurusController extends Controller
             $dataPeserta = $this->model('PesertaModel')->show('get_by_id_kategori_jadwal',$condition);
             // var_dump($dataPeserta);
 
-            $data['kategori'][] = ['kategori'=>$d['kategori'],'subKategori'=>$d['subKategori']];
+            $data['kategori'][] = [
+                'kategori'=>$d['kategori'],
+                'subKategori'=>$d['subKategori'],
+                'jenis'=>$d['jenis']
+            ];
             if($dataPeserta!==NULL){
                 $countData = isset($dataPeserta['nama']) ? 1 : count($dataPeserta);
                 // $countData = count($dataPeserta);
