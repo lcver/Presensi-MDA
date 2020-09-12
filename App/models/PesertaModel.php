@@ -33,6 +33,18 @@ class PesertaModel extends Controller
                                                         ->orderBy("curent_timestamp","asc")
                                                         ->get();
                         break;
+                    case 'hadir_by_id_kategori_jadwal':
+                        $result = Database::table("peserta")
+                                                    ->raw("idKategori=".$cond['id']." and idJadwal=".$cond['idJadwal']." and peserta.kehadiran='hadir'")
+                                                    ->orderBy("curent_timestamp","asc")
+                                                    ->get();
+                        break;
+                    case 'izin_by_id_kategori_jadwal':
+                        $result = Database::table("peserta")
+                                                    ->raw("idKategori=".$cond['id']." and idJadwal=".$cond['idJadwal']." and peserta.kehadiran='izin'")
+                                                    ->orderBy("curent_timestamp","asc")
+                                                    ->get();
+                        break;
                     case 'filtering' :
                         $result = Database::table('peserta')
                                                 ->raw(

@@ -47,7 +47,7 @@ class PengurusController extends Controller
             ];
             // var_dump($condition);
 
-            $dataPeserta = $this->model('PesertaModel')->show('get_by_id_kategori_jadwal',$condition);
+            $dataPeserta = $this->model('PesertaModel')->show('hadir_by_id_kategori_jadwal',$condition);
             // var_dump($dataPeserta);
 
             $data['kategori'][] = [
@@ -129,7 +129,7 @@ class PengurusController extends Controller
                 'id'=> $d['id'],
                 'idJadwal'=> $res['id']
             ];
-            $dataPeserta = $this->model('PesertaModel')->show('get_by_id_kategori_jadwal',$condition);
+            $dataPeserta = $this->model('PesertaModel')->show('hadir_by_id_kategori_jadwal',$condition);
 
             if($dataPeserta!==NULL){
                 $countData = isset($dataPeserta['nama']) ? 1 : count($dataPeserta);
@@ -144,5 +144,63 @@ class PengurusController extends Controller
 
         // var_dump($resData);
         echo json_encode($resData);
+    }
+
+    public function daftarizin()
+    {
+        $data['subtitlepage'] = "Data Izin Peserta";
+        /**
+         * Search jadwal have status is 2
+         */
+        $result = $this->model('JadwalModel')->show('get_active_jadwal');
+        $data['status_jadwal'] = Helper::null_checker($result);
+        if(is_null($data['status_jadwal'])){
+            $this->view('dashboard/index',$data);
+            return false;
+        }
+        
+        foreach ($data['status_jadwal'] as $d) {
+            $idJadwal = $d['id'];
+        }
+
+        $dataKategori = $this->model('KategoriModel')->create();
+
+        $resData=[];
+        $total=0;
+        foreach ($dataKategori as $d) {
+            $condition = [
+                'id'=> $d['id'],
+                'idJadwal'=> $idJadwal
+            ];
+            // var_dump($condition);
+
+            $dataPeserta = $this->model('PesertaModel')->show('izin_by_id_kategori_jadwal',$condition);
+            // var_dump($dataPeserta);
+
+            $data['kategori'][] = [
+                'kategori'=>$d['kategori'],
+                'subKategori'=>$d['subKategori'],
+                'jenis'=>$d['jenis']
+            ];
+            if($dataPeserta!==NULL){
+                $countData = isset($dataPeserta['nama']) ? 1 : count($dataPeserta);
+                // $countData = count($dataPeserta);
+                $resData[] = [
+                    'idKategori'=> $d['id'],
+                    'jumlah'=>$countData
+                ];
+                $subtotal = $countData;
+                $total += $subtotal;
+            }else{
+                $resData[] = [
+                    'idKategori'=> $d['id'],
+                    'jumlah'=> 0
+                ];
+            }
+        }
+        $data['total'] = $total;
+        $data['jumlahdata'] = $resData;
+
+        $this->view("dashboard/daftarizin",$data);
     }
 }
