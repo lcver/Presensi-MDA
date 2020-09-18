@@ -6,7 +6,7 @@ class PengurusController extends Controller
 {
     public function index()
     {
-        $data['subtitlepage'] = "Rekapitulasi Presensi Online Asrama Al-Qur&#039;an PPG Jakarta Pusat";
+        $data['subtitlepage'] = "Rekapitulasi Presensi Online Rejapu";
 
         /**
          * Search jadwal have status is 2

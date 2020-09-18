@@ -3,8 +3,8 @@
         <div class="col-md-10 mx-auto">
             <div class="card bg-transparent shadow-none">
                 <div class="text-center">
-                    <img src="<?=BASEURL?>img/logoPPG.jpeg" alt="" class="img-thumbnail img-circle p-0" style="max-width:100px">
-                    <h4>Presensi Online Asrama Al-Qur&#039;an PPG Jakarta Pusat</h4>
+                    <img src="<?=BASEURL?>img/logoREJAPU.jpg" alt="" class="img-thumbnail img-circle p-0" style="max-width:100px">
+                    <h4>Presensi Online Rejapu</h4>
                     <!-- <h5>PPG Jakarta Pusat</h5> -->
                 </div>
             </div>

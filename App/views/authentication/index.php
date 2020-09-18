@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>login | PPG Jakarta Pusat</title>
+  <title>login | Rejapu</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- favicon -->
-  <link rel="shortcut icon" href="<?=BASEURL?>img/logoPPG.jpeg" type="image/x-icon">
+  <link rel="shortcut icon" href="<?=BASEURL?>img/logoREJAPU.jpg" type="image/x-icon">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?=BASEURL?>vendor/almasaeed2010/adminlte/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -35,7 +35,7 @@
   <div class="lockscreen-item">
     <!-- lockscreen image -->
     <div class="lockscreen-image">
-      <img src="<?=BASEURL?>/img/logoPPG.jpeg" alt="User Image">
+      <img src="<?=BASEURL?>/img/logoREJAPU.jpg" alt="User Image">
     </div>
     <!-- /.lockscreen-image -->
 
