@@ -64,41 +64,33 @@ class Database
      */
     public function insert($data)
     {
-        $val=[];
+        // Get data value
+        $values = [];
         foreach ($data as $key => $value) {
+            if( is_string($value) )
+                { $values[] = "'".$value."'"; }
 
-            if(!is_null($value)):
+            elseif( is_numeric($value) )
+                { $values[] = $value; }
 
-                if(is_int($value)):
-                    $values = $value;
-                else:
-                    $values = "'".$value."'";
-                endif;
-
-            else:
-                $values = 'NULL';
-            endif;
-
-            // is integer
-            // $values = is_int($value) ? $value : "'".$value."'";
-
-            // is null
-            // $values = is_null($value) ? 'NULL' : $value ;
-
-            $val[] = $values;
+            elseif( is_null($value))
+                { $value[] = "''"; }
         }
+        $val = implode(',', $values);
 
-        $val = implode(',', $val);
-        $col = implode(',', array_keys($data));
+        // Set to null when have string 0
+        $val = preg_replace("/''/",'null',$val);
+        
+        // Get data column
+        $column = array_keys($data);
+        $column = implode(',',$column);
 
-        $sql = "insert into ".self::$sql['table']."($col) values ($val)";
-        // var_dump($sql);die();
+        self::$querySQL['insert'] = "insert into ".self::$table."($column) values ($val)";
+        
+        $c = Factory::$connection;
+        $result = $c->query(self::$querySQL['insert']);
 
-        if($this->mysqli->query($sql)){
-            return true;
-        }else{
-            return false;
-        }
+        return $result;
     }
 
     /**
