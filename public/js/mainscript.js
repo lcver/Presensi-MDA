@@ -132,3 +132,12 @@ $("input[name='presensi_kehadiran']").on("change", function(){
     $("#boxKeterangan").find($("#keterangan")).remove()
   }
 })
+
+$("input[name='presensi_jeniskelamin']").on("change", function(){
+  if($("input[name='presensi_jeniskelamin']:checked").val() == "p")
+  {
+    $("#saranKegiatan").append('<div class="card"><div class="card-body"><div class="col-md-5"><div class="form-group"><label class="text-md col-form-label-sm">kegiatan keputrian apa yg diharapkan untuk dilaksanakan?</label><textarea name="saranKegiatan" class="form-control"></textarea></div></div></div></div>')
+  } else {
+    $("#saranKegiatan").find($(".card")).remove()
+  }
+})

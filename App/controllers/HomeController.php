@@ -46,9 +46,10 @@ class HomeController extends Controller
             'nama'=>$nama,
             'jenis_kelamin'=>$_POST['presensi_jeniskelamin'],
             'kehadiran'=>$_POST['presensi_kehadiran'],
-            'keterangan'=>$_POST['presensi_keterangan'],
+            'keterangan'=> isset($_POST['presensi_keterangan']) ? $_POST['presensi_keterangan'] : '',
             'idKategori'=>$_POST['presensi_kategori'],
-            'idJadwal'=>$_POST['presensi_idJadwal']
+            'idJadwal'=>$_POST['presensi_idJadwal'],
+            'saranKegiatan'=> isset($_POST['saranKegiatan']) ? $_POST['saranKegiatan'] : null,
         ];
         // var_dump($postData);
 
@@ -68,8 +69,7 @@ class HomeController extends Controller
 
         if($res===null)
         {
-            $res = $this->model('PesertaModel')->store($postData);
-            if($res===true)
+            if($this->model('PesertaModel')->store($postData))
             {
                 Flasher::setFlash("Berhasil",true);
             }else{
@@ -79,7 +79,7 @@ class HomeController extends Controller
             Flasher::setFlash("Hanya satu kali absen",false);
         }
 
-        header('location:'.BASEURL);
+        // header('location:'.BASEURL);
     }
 
     /**
