@@ -84,11 +84,12 @@ class Database
         // Get data column
         $column = array_keys($data);
         $column = implode(',',$column);
-
-        self::$querySQL['insert'] = "insert into ".self::$table."($column) values ($val)";
         
-        $c = Factory::$connection;
-        $result = $c->query(self::$querySQL['insert']);
+        self::$sql['insert'] = "insert into ".self::$sql['table']."($column) values ($val)";
+        var_dump(self::$sql['insert']);
+        
+        $result = $this->mysqli->query(self::$sql['insert']);
+        var_dump($result);
 
         return $result;
     }
